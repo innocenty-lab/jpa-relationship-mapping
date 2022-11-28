@@ -32,29 +32,31 @@ public class Student {
     @Setter @Getter
     private Gender gender;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "major_id")
     @Setter @Getter
-    private String major;
+    private Major major;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "birth_date", nullable = false)
     @Setter @Getter
     private Date birthDate;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 //    @OneToOne
     @JoinColumn(name = "credential_id")
     @Setter @Getter
     private UserCredential userCredential;
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "studentId=" + studentId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender=" + gender +
-                ", major='" + major + '\'' +
-                ", birthDate=" + birthDate +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Student{" +
+//                "studentId=" + studentId +
+//                ", firstName='" + firstName + '\'' +
+//                ", lastName='" + lastName + '\'' +
+//                ", gender=" + gender +
+//                ", major='" + major + '\'' +
+//                ", birthDate=" + birthDate +
+//                '}';
+//    }
 }

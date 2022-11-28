@@ -13,16 +13,11 @@ public class UserCredential {
     @Setter @Getter
     private String username;
 
+    @Column(nullable = false)
     @Setter @Getter
     private String password;
 
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-////    @OneToOne
-//    @JoinColumn(name = "student_id")
-//    @Setter @Getter
-//    private Student student;
-
-    @OneToOne(mappedBy = "userCredential")
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "userCredential")
     @Setter @Getter
     private Student student;
 }
