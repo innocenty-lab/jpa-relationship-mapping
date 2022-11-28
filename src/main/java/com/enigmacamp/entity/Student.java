@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @DynamicUpdate
-@ToString
+//@ToString
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,4 +39,22 @@ public class Student {
     @Column(name = "birth_date", nullable = false)
     @Setter @Getter
     private Date birthDate;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @OneToOne
+    @JoinColumn(name = "credential_id")
+    @Setter @Getter
+    private UserCredential userCredential;
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", major='" + major + '\'' +
+                ", birthDate=" + birthDate +
+                '}';
+    }
 }
