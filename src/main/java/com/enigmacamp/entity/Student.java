@@ -7,11 +7,13 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @DynamicUpdate
-//@ToString
+@ToString
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,15 +50,12 @@ public class Student {
     @Setter @Getter
     private UserCredential userCredential;
 
-//    @Override
-//    public String toString() {
-//        return "Student{" +
-//                "studentId=" + studentId +
-//                ", firstName='" + firstName + '\'' +
-//                ", lastName='" + lastName + '\'' +
-//                ", gender=" + gender +
-//                ", major='" + major + '\'' +
-//                ", birthDate=" + birthDate +
-//                '}';
-//    }
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "M_STUDENT_PROJECT",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    @Setter @Getter
+    private List<GroupProject> groupProjectList = new ArrayList<>();
 }
